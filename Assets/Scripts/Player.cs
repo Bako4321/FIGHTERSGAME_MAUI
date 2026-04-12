@@ -57,7 +57,8 @@ public class Player : MonoBehaviour
         }
 
 
-    // VERTICAL clamp (bottom half only)
+    
+  // VERTICAL clamp (bottom half only)
     float clampedY = Mathf.Clamp(
         transform.position.y,
         -verticalScreenLimit, // bottom of screen
@@ -66,11 +67,6 @@ public class Player : MonoBehaviour
 
     transform.position = new Vector3(transform.position.x, clampedY, 0);
 
-        //Player leaves the screen vertically
-        if(transform.position.y > verticalScreenLimit || transform.position.y <= -verticalScreenLimit)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
-        }
     }
 
 }
