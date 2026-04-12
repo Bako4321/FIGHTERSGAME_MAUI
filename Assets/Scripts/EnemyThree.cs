@@ -1,16 +1,32 @@
 using UnityEngine;
 
-public class EnemyThree : MonoBehaviour
+public class Enemy3 : MonoBehaviour
 {
-    public float speed = 8f;
+    private int switchDirection = -1;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        switchDirection = (Random.value < 0.5f) ? -1 : 1;
+    }
 
+    // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        transform.Translate(new Vector3(switchDirection, -0.5f, 0) * Time.deltaTime * 3f);
 
-        if (transform.position.y < -8f) ;
+        if (transform.position.x <= -5f)
         {
-            Destroy(gameObject);
+            switchDirection = 1;
+        }
+
+        if (transform.position.x >= 7f)
+        {
+            switchDirection = -1;
+        }
+
+        if (transform.position.y < -6.5f)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
