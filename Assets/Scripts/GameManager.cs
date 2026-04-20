@@ -7,13 +7,14 @@ public class GameManager : MonoBehaviour
     public GameObject enemyOnePrefab;
     public GameObject enemyTwoPrefab;
     public GameObject enemyThreePrefab;
+    public GameObject ShieldPrefab;
 
     void Start()
     {
         InvokeRepeating("CreateEnemyOne", 1, 2);
         InvokeRepeating("CreateEnemyTwo", 2, 3);
         InvokeRepeating("CreateEnemyThree", 3, 4);
-
+        InvokeRepeating("SpawnShield", 2f, 4f);
     }
 
     void CreateEnemyOne()
@@ -28,5 +29,14 @@ public class GameManager : MonoBehaviour
     void CreateEnemyThree()
     {
         Instantiate(enemyThreePrefab, new Vector3(Random.Range(-6f, 9f), 6.5f, 0f), Quaternion.identity);
+    }
+    void SpawnShield()
+    {
+        float x = Random.Range(-4f, 4f);
+        float y = 5f; 
+
+        Vector3 spawnPos = new Vector3(x, y, 0f);
+
+        Instantiate(ShieldPrefab, spawnPos, Quaternion.identity);
     }
 }
