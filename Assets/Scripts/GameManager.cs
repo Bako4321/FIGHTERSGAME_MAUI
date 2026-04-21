@@ -1,3 +1,4 @@
+// refresh
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,33 @@ public class GameManager : MonoBehaviour
     public GameObject enemyTwoPrefab;
     public GameObject enemyThreePrefab;
     public GameObject ShieldPrefab;
+    public GameObject cloudPrefab;
+    
+    public float horizontalScreenSize;
+    public float verticalScreenSize;
 
     void Start()
     {
+        horizontalScreenSize = 10f;
+        verticalScreenSize = 6.5f;
+
+        CreateSky();
+
         InvokeRepeating("CreateEnemyOne", 1, 2);
         InvokeRepeating("CreateEnemyTwo", 2, 3);
         InvokeRepeating("CreateEnemyThree", 3, 4);
         InvokeRepeating("SpawnShield", 2f, 4f);
     }
+
+    void CreateSky()
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
+        }
+        
+    }
+
 
     void CreateEnemyOne()
     {
