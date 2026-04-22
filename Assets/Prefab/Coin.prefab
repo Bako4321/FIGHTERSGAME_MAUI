@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5304371083796786964}
   - component: {fileID: 1638861423079082547}
   - component: {fileID: 5782977339538645331}
-  - component: {fileID: -8962462438400778520}
+  - component: {fileID: 3595841338814354742}
   - component: {fileID: 5378926727472900635}
   m_Layer: 0
   m_Name: Coin
@@ -113,7 +113,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8962462438400778520
+--- !u!114 &3595841338814354742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,10 +122,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668335986777445209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52bedc002cc86e6418da3950602850f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 267520c9a10d2e74e882e623ba39306a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Coin
-  value: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Coin1
 --- !u!114 &5378926727472900635
 MonoBehaviour:
   m_ObjectHideFlags: 0
