@@ -12,19 +12,19 @@ public class Enemy3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(switchDirection, -0.5f, 0) * Time.deltaTime * 3f);
+        transform.Translate(new Vector3(switchDirection, -0.5f, 0) * Time.deltaTime * 9f);
 
-        if (transform.position.x <= -5f)
+        if (transform.position.x <= -14f)
         {
             switchDirection = 1;
         }
 
-        if (transform.position.x >= 7f)
+        if (transform.position.x >= 14f)
         {
             switchDirection = -1;
         }
 
-        if (transform.position.y < -6.5f)
+        if (transform.position.y < -8.5f)
         {
             Destroy(this.gameObject);
         }

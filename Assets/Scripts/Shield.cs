@@ -1,48 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
-public class PlayerShield : MonoBehaviour
+public class ShieldPickup : MonoBehaviour
 {
-    public GameObject shieldVisual; // assign in Inspector
-
-    private bool shieldActive = false;
-    private float shieldTimer;
-
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (shieldActive)
+        if (other.CompareTag("Player"))
         {
-            shieldTimer -= Time.deltaTime;
+            Shield shield = other.GetComponent<Shield>();
 
-            if (shieldTimer <= 0)
+            if (shield != null)
             {
-                DeactivateShield();
+                shield.ActivateShield(5f); // shield lasts 5 seconds
             }
+
+            Destroy(gameObject);
         }
-    }
-
-    public void ActivateShield(float duration)
-    {
-        shieldActive = true;
-        shieldTimer = duration;
-
-        if (shieldVisual != null)
-        {
-            shieldVisual.SetActive(true);
-        }
-    }
-
-    void DeactivateShield()
-    {
-        shieldActive = false;
-
-        if (shieldVisual != null)
-        {
-            shieldVisual.SetActive(false);
-        }
-    }
-
-    public bool IsShieldActive()
-    {
-        return shieldActive;
     }
 }

@@ -12,13 +12,13 @@ public class EnemyTwo : MonoBehaviour
         if (Random.value < 0.5f)
         {
             // Spawn on left side
-            transform.position = new Vector3(-8f, Random.Range(-4f, 4f), 0f);
+            transform.position = new Vector3(-15f, Random.Range(-5f, 5f), 0f);
             direction = 1f; // move right
         }
         else
         {
             // Spawn on right side
-            transform.position = new Vector3(8f, Random.Range(-4f, 4f), 0f);
+            transform.position = new Vector3(15f, Random.Range(-7f, 7f), 0f);
             direction = -1f; // move left
         }
     }
@@ -29,7 +29,7 @@ public class EnemyTwo : MonoBehaviour
         transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
 
         // Destroy when off screen
-        if (transform.position.x > 9f || transform.position.x < -9f)
+        if (transform.position.x > 15f || transform.position.x < -15f)
         {
             Destroy(gameObject);
         }

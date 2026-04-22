@@ -9,21 +9,30 @@ public class GameManager : MonoBehaviour
     public GameObject enemyThreePrefab;
     public GameObject ShieldPrefab;
     public GameObject cloudPrefab;
-    
+
     public float horizontalScreenSize;
     public float verticalScreenSize;
 
     void Start()
     {
-        horizontalScreenSize = 10f; 
-        verticalScreenSize = 6.5f; 
+        horizontalScreenSize = 15f;
+        verticalScreenSize = 14.5f;
 
         CreateSky();
 
         InvokeRepeating("CreateEnemyOne", 1, 2);
         InvokeRepeating("CreateEnemyTwo", 2, 3);
         InvokeRepeating("CreateEnemyThree", 3, 4);
-        InvokeRepeating("SpawnShield", 2f, 4f);
+
+        StartCoroutine(SpawnShieldRoutine());
+        IEnumerator SpawnShieldRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Random.Range(24f, 30f)); // 4–5 per 2 minutes
+                SpawnShield();
+            }
+        }
     }
 
     void CreateSky()
@@ -32,27 +41,29 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
         }
-        
-    }
 
+    }
 
     void CreateEnemyOne()
     {
-        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) *.9f, verticalScreenSize, 0), Quaternion.identity);
+        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * .9f, verticalScreenSize, 0), Quaternion.identity);
     }
 
     void CreateEnemyTwo()
     {
-        Instantiate(enemyTwoPrefab, new Vector3(Random.Range(-8f, 8f), 7f, 0), Quaternion.identity);
+        Instantiate(enemyTwoPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 7f, verticalScreenSize, 0), Quaternion.identity);
     }
     void CreateEnemyThree()
     {
-        Instantiate(enemyThreePrefab, new Vector3(Random.Range(-6f, 9f), 6.5f, 0f), Quaternion.identity);
+        Instantiate(enemyThreePrefab, new Vector3(Random.Range(-7f, 7f) * 6.5f, verticalScreenSize, 0), Quaternion.identity);
     }
     void SpawnShield()
     {
-        float x = Random.Range(-4f, 4f);
-        float y = 5f; 
+        float screenHalfHeight = Camera.main.orthographicSize;
+        float screenHalfWidth = screenHalfHeight * Screen.width / Screen.height;
+
+        float x = Random.Range(-7f, 7f);
+        float y = Random.Range(-8f, -1f);
 
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
