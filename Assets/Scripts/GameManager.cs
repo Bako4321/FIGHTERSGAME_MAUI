@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; 
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     
     public float horizontalScreenSize;
     public float verticalScreenSize;
+
+    public TextMeshProUGUI livesText; 
 
     void Start()
     {
@@ -57,5 +60,9 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
         Instantiate(ShieldPrefab, spawnPos, Quaternion.identity);
+    }
+
+    public void ChangeLivesText (int currentLives){
+        livesText.text = "lives" + currentLives; 
     }
 }

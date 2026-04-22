@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //how to define a variable
     //1. access modifier: public or private
@@ -10,18 +10,25 @@ public class Player : MonoBehaviour
     //3. variable name: camelCase
     //4. value: optional
 
+    public int lives; 
+    public GameManager gameManager; 
+    public GameObject explosionPrefab; 
     private float playerSpeed;
+
     private float horizontalInput;
     private float verticalInput;
 
-    private float horizontalScreenLimit = 9.5f;
-    private float verticalScreenLimit = 6.5f;
+
 
     public GameObject bulletPrefab;
 
     void Start()
     {
         playerSpeed = 6f;
+        lives = 3; 
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.ChangeLivesText(lives); 
+
         //This function is called at the start of the game
         
     }
@@ -32,6 +39,14 @@ public class Player : MonoBehaviour
         Movement();
         Shooting();
 
+    }
+    public void LoseALife(){
+        lives--;
+        gameManager.ChangeLivesText(lives); 
+        if(lives ==0){
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
     }
 
     void Shooting()
@@ -50,8 +65,12 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         //Move the player
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * Time.deltaTime * playerSpeed);
+
+        float horizontalScreenSize = gameManager.horizontalScreenSize; 
+        float verticalScreenSize = gameManager.verticalScreenSize; 
+
         //Player leaves the screen horizontally
-        if(transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
+        if(transform.position.x > horizontalScreenSize || transform.position.x <= -horizontalScreenSize)
         {
             transform.position = new Vector3(transform.position.x * -1, transform.position.y, 0);
         }
@@ -61,7 +80,7 @@ public class Player : MonoBehaviour
   // VERTICAL clamp (bottom half only)
     float clampedY = Mathf.Clamp(
         transform.position.y,
-        -verticalScreenLimit, // bottom of screen
+        -verticalScreenSize, // bottom of screen
         0f                    // middle of screen
     );
 

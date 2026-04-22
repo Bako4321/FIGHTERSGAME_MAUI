@@ -18,6 +18,11 @@ public class Cloud : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(Vector3.down * Time.deltaTime * speed);
+        if (transform.position.y < -gameManager.verticalScreenSize)
+        {
+            transform.position = new Vector3(Random.Range(-gameManager.horizontalScreenSize, gameManager.horizontalScreenSize), gameManager.verticalScreenSize *1.2f, 0f); 
+
+        }
     }
 }
