@@ -402,7 +402,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -427,7 +427,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -466,6 +466,9 @@ MonoBehaviour:
   enemyTwoPrefab: {fileID: 9081002450290056849, guid: 1ce09a9d8207b604f9b66b0e101f2ca0, type: 3}
   enemyThreePrefab: {fileID: 4730195380929137402, guid: 4938d4a3a6fa7f747b1eb379c74e5dab, type: 3}
   ShieldPrefab: {fileID: 8163316058529485204, guid: b5f8a5d81c474894aac8b4b81e56c281, type: 3}
+  cloudPrefab: {fileID: 9207418728420716899, guid: 6622957d7ee924de4968a8131a8cb412, type: 3}
+  horizontalScreenSize: 0
+  verticalScreenSize: 0
 --- !u!4 &2142600587
 Transform:
   m_ObjectHideFlags: 0
