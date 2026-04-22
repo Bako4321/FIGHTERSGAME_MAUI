@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemyThreePrefab;
     public GameObject ShieldPrefab;
     public GameObject cloudPrefab;
+    public GameObject CoinPrefab;
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
@@ -33,6 +34,16 @@ public class GameManager : MonoBehaviour
                 SpawnShield();
             }
         }
+
+        StartCoroutine(SpawnCoinRoutine());
+        IEnumerator SpawnCoinRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Random.Range(15f, 22f)); // 4–5 per 2 minutes
+                SpawnCoin();
+            }
+        }
     }
 
     void CreateSky()
@@ -43,7 +54,6 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
     void CreateEnemyOne()
     {
         Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * .9f, verticalScreenSize, 0), Quaternion.identity);
@@ -68,5 +78,17 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
         Instantiate(ShieldPrefab, spawnPos, Quaternion.identity);
+    }
+    void SpawnCoin()
+    {
+        float screenHalfHeight = Camera.main.orthographicSize;
+        float screenHalfWidth = screenHalfHeight * Screen.width / Screen.height;
+
+        float x = Random.Range(-9f, 9f);
+        float y = Random.Range(-8f, -2f);
+
+        Vector3 spawnPos = new Vector3(x, y, 0f);
+
+        Instantiate(CoinPrefab, spawnPos, Quaternion.identity);
     }
 }
