@@ -1,0 +1,96 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    //how to define a variable
+    //1. access modifier: public or private
+    //2. data type: int, float, bool, string
+    //3. variable name: camelCase
+    //4. value: optional
+
+    public int lives; 
+    public GameManager gameManager; 
+    public GameObject explosionPrefab; 
+    private float playerSpeed;
+
+    private float horizontalInput;
+    private float verticalInput;
+
+<<<<<<< HEAD:Assets/Scripts/Player.cs
+    private float horizontalScreenLimit = 15f;
+    private float verticalScreenLimit = 14.5f;
+=======
+
+>>>>>>> main:Assets/Scripts/PlayerController.cs
+
+    public GameObject bulletPrefab;
+
+    void Start()
+    {
+        playerSpeed = 6f;
+        lives = 3; 
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.ChangeLivesText(lives); 
+
+        //This function is called at the start of the game
+        
+    }
+
+    void Update()
+    {
+        //This function is called every frame; 60 frames/second
+        Movement();
+        Shooting();
+
+    }
+    public void LoseALife(){
+        lives--;
+        gameManager.ChangeLivesText(lives); 
+        if(lives ==0){
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+    }
+
+    void Shooting()
+    {
+        //if the player presses the SPACE key, create a projectile
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(bulletPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        }
+    }
+
+    void Movement()
+    {
+        //Read the input from the player
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        //Move the player
+        transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * Time.deltaTime * playerSpeed);
+
+        float horizontalScreenSize = gameManager.horizontalScreenSize; 
+        float verticalScreenSize = gameManager.verticalScreenSize; 
+
+        //Player leaves the screen horizontally
+        if(transform.position.x > horizontalScreenSize || transform.position.x <= -horizontalScreenSize)
+        {
+            transform.position = new Vector3(transform.position.x * -1, transform.position.y, 0);
+        }
+
+
+    
+  // VERTICAL clamp (bottom half only)
+    float clampedY = Mathf.Clamp(
+        transform.position.y,
+        -verticalScreenSize, // bottom of screen
+        0f                    // middle of screen
+    );
+
+    transform.position = new Vector3(transform.position.x, clampedY, 0);
+
+    }
+
+}

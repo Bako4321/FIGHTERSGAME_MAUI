@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         {
             while (true)
             {
-                yield return new WaitForSeconds(Random.Range(15f, 22f)); // 4–5 per 2 minutes
+                yield return new WaitForSeconds(Random.Range(10f, 18f)); // 4–5 per 2 minutes
                 SpawnCoin();
             }
         }
