@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        horizontalScreenSize = 10f;
-        verticalScreenSize = 6.5f;
+        horizontalScreenSize = 10f; 
+        verticalScreenSize = 6.5f; 
 
         CreateSky();
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void CreateEnemyOne()
     {
-        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
+        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) *.9f, verticalScreenSize, 0), Quaternion.identity);
     }
 
     void CreateEnemyTwo()
