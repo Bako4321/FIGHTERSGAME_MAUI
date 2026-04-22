@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour
     public float horizontalScreenSize;
     public float verticalScreenSize;
 
-    public TextMeshProUGUI livesText; 
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI scoreText; 
+
+    public int score;
 
     void Start()
     {
         horizontalScreenSize = 10f; 
         verticalScreenSize = 6.5f; 
+        score = 0;
 
         CreateSky();
 
@@ -60,6 +64,11 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
         Instantiate(ShieldPrefab, spawnPos, Quaternion.identity);
+    }
+    public void AddScore(int earnedScore)
+    {
+        score = score + earnedScore;
+        scoreText.text = "Score: " + score;
     }
 
     public void ChangeLivesText (int currentLives){
