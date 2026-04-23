@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         {
             while (true)
             {
-                yield return new WaitForSeconds(Random.Range(24f, 30f)); // 4–5 per 2 minutes
+                yield return new WaitForSeconds(Random.Range(24f, 30f)); // 4ï¿½5 per 2 minutes
                 SpawnShield();
             }
         }
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         {
             while (true)
             {
-                yield return new WaitForSeconds(Random.Range(10f, 18f)); // 4–5 per 2 minutes
+                yield return new WaitForSeconds(Random.Range(10f, 18f)); // 4ï¿½5 per 2 minutes
                 SpawnCoin();
             }
         }
@@ -104,16 +104,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ChangedLivesTex(int earnedLives)
-
+   public void ChangeLivesText (int currentLives)
     {
-        string currentLives = null;
-        livesText.text = "lives" + currentLives;
-    
+        livesText.text = "Lives: " + currentLives;
     }
-
-    internal void ChangeLivesText(int lives)
-    {
-        throw new System.NotImplementedException();
-    }
+ 
 }

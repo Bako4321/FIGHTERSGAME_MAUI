@@ -243,6 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115d8d333cd733d4282c192af4ced29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 0
+  gameManager: {fileID: 0}
+  explosionPrefab: {fileID: 0}
   bulletPrefab: {fileID: 6405400452280573197, guid: b1eed6253aa069845b0edf3f90db799d, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -442,7 +445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142600587}
-  - component: {fileID: 2142600586}
+  - component: {fileID: 2142600588}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -450,21 +453,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2142600586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142600585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62c54f11f389f2458ff7c03f3db9a18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyOnePrefab: {fileID: 9207418728420716899, guid: 57d7aa5182902e24cb707961f14f52d5, type: 3}
-  enemyTwoPrefab: {fileID: 9081002450290056849, guid: 1ce09a9d8207b604f9b66b0e101f2ca0, type: 3}
-  enemyThreePrefab: {fileID: 4730195380929137402, guid: 4938d4a3a6fa7f747b1eb379c74e5dab, type: 3}
 --- !u!4 &2142600587
 Transform:
   m_ObjectHideFlags: 0
@@ -480,6 +468,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2142600588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142600585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7046a48e38a307c4ca782f2462fe3bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HunterGameManager
+  enemyOnePrefab: {fileID: 9207418728420716899, guid: 57d7aa5182902e24cb707961f14f52d5, type: 3}
+  enemyTwoPrefab: {fileID: 9081002450290056849, guid: 1ce09a9d8207b604f9b66b0e101f2ca0, type: 3}
+  enemyThreePrefab: {fileID: 4730195380929137402, guid: 4938d4a3a6fa7f747b1eb379c74e5dab, type: 3}
+  ShieldPrefab: {fileID: 8163316058529485204, guid: b5f8a5d81c474894aac8b4b81e56c281, type: 3}
+  cloudPrefab: {fileID: 9207418728420716899, guid: 6622957d7ee924de4968a8131a8cb412, type: 3}
+  HealthPowerUpPrefab: {fileID: 9207418728420716899, guid: 58c8305a831cf7f4c89cdbbe537f3716, type: 3}
+  horizontalScreenSize: 0
+  verticalScreenSize: 0
+  livesText: {fileID: 0}
+  scoreText: {fileID: 0}
+  score: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
