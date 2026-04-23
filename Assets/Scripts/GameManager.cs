@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
+
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI scoreText;
 
     void Start()
     {
@@ -90,5 +94,26 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
         Instantiate(CoinPrefab, spawnPos, Quaternion.identity);
+    }
+
+    public void AddScore(int earnedScore)
+    {
+       
+        string score = null;
+        scoreText.text = "Score:" + score;
+
+    }
+
+    public void ChangedLivesTex(int earnedLives)
+
+    {
+        string currentLives = null;
+        livesText.text = "lives" + currentLives;
+    
+    }
+
+    internal void ChangeLivesText(int lives)
+    {
+        throw new System.NotImplementedException();
     }
 }
