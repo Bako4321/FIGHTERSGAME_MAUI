@@ -19,10 +19,13 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI scoreText;
 
+    public int score;
+
     void Start()
     {
         horizontalScreenSize = 15f;
         verticalScreenSize = 14.5f;
+        score = 0; 
 
         CreateSky();
 
@@ -110,7 +113,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int earnedScore)
     {
        
-        string score = null;
+        score = score + earnedScore;
         scoreText.text = "Score:" + score;
 
     }
