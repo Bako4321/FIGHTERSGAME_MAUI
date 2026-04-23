@@ -1,17 +1,23 @@
-using System.Collections;
 using UnityEngine;
 
-public class ShieldPickup : MonoBehaviour
+public class ShieldPowerUp : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    public float shieldDuration = 5f; // how long the shield lasts
+
+    void Start()
+    {
+        Destroy(gameObject, 5f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Shield shield = other.GetComponent<Shield>();
+            PlayerController player = other.GetComponent<PlayerController>();
 
-            if (shield != null)
+            if (player != null)
             {
-                shield.ActivateShield(5f); // shield lasts 5 seconds
+                player.ActivateShield(shieldDuration);
             }
 
             Destroy(gameObject);
