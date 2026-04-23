@@ -4,7 +4,7 @@ public class Coin : MonoBehaviour
 {
     void Start()
     {
-        Destroy(gameObject, 4f);
+        Destroy(gameObject, 5f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -15,7 +15,7 @@ public class Coin : MonoBehaviour
 
             if (gm != null)
             {
-                gm.AddScore(1); // Add 1 point (you can change this value)
+                gm.AddScore(1); // Add however many points you want
             }
 
             Destroy(gameObject);
