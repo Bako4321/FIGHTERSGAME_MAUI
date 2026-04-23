@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private float verticalScreenSize;
 
     public GameObject bulletPrefab;
-    private bool shieldActive;
+    private bool ShieldActive;
 
     void Start()
     {
@@ -53,26 +53,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Shield()
-    {
-        if (!shieldActive)
-        {
-            lives--;
-            gameManager.ChangeLivesText(lives);
+    
+    public bool shieldActive = false;
 
-            if (lives == 0)
-            {
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            // Optional: feedback when shield blocks damage
-            Debug.Log("Shield absorbed damage!");
-        }
+    public void ActivateShield(float duration)
+    {
+        StopAllCoroutines(); // optional: refresh shield if picked up again
+        StartCoroutine(ShieldCoroutine(duration));
     }
 
+    private IEnumerator ShieldCoroutine(float duration)
+    {
+        shieldActive = true;
+
+        // Optional: enable shield visual here
+
+        yield return new WaitForSeconds(duration);
+
+        shieldActive = false;
+
+        // Optional: disable shield visual here
+    }
 
     void Shooting()
     {
@@ -113,8 +114,4 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    internal void ActivateShield(float shieldDuration)
-    {
-        throw new NotImplementedException();
-    }
 }
