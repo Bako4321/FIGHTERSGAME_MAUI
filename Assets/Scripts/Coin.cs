@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    void Start()
+    {
+        Destroy(gameObject, 4f);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
