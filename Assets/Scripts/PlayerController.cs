@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private float verticalScreenSize;
 
     public GameObject bulletPrefab;
+    private bool ShieldActive;
 
     void Start()
     {
@@ -49,6 +51,28 @@ public class PlayerController : MonoBehaviour
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
+    }
+
+    
+    public bool shieldActive = false;
+
+    public void ActivateShield(float duration)
+    {
+        StopAllCoroutines(); // optional: refresh shield if picked up again
+        StartCoroutine(ShieldCoroutine(duration));
+    }
+
+    private IEnumerator ShieldCoroutine(float duration)
+    {
+        shieldActive = true;
+
+        // Optional: enable shield visual here
+
+        yield return new WaitForSeconds(duration);
+
+        shieldActive = false;
+
+        // Optional: disable shield visual here
     }
 
     void Shooting()
