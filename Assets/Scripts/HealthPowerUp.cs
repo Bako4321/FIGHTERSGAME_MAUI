@@ -19,11 +19,11 @@ public class HealthPowerUp : MonoBehaviour
                 if (player.lives < 3)
                 {
                     player.lives++;
-                    FindObjectOfType<GameManager>().ChangeLivesText(player.lives);
+                    FindFirstObjectByType<GameManager>().ChangeLivesText(player.lives);
                 }
                 else
                 {
-                    FindObjectOfType<GameManager>().AddScore(1);
+                    Object.FindFirstObjectByType<GameManager>().AddScore(1);
                 }
             }
 
