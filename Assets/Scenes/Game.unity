@@ -254,10 +254,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 154190342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -233, y: 119}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &212177055
 MonoBehaviour:
@@ -830,10 +830,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 154190342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: 119}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036834886
 MonoBehaviour:
@@ -968,12 +968,11 @@ MonoBehaviour:
   enemyThreePrefab: {fileID: 4730195380929137402, guid: 4938d4a3a6fa7f747b1eb379c74e5dab, type: 3}
   ShieldPrefab: {fileID: 8163316058529485204, guid: b5f8a5d81c474894aac8b4b81e56c281, type: 3}
   cloudPrefab: {fileID: 9207418728420716899, guid: 6622957d7ee924de4968a8131a8cb412, type: 3}
-  CoinPrefab: {fileID: 1668335986777445209, guid: 689588e55e867f4498a85c7ed057d619, type: 3}
-  HealthPowerUpPrefab: {fileID: 9207418728420716899, guid: 58c8305a831cf7f4c89cdbbe537f3716, type: 3}
   horizontalScreenSize: 0
   verticalScreenSize: 0
   livesText: {fileID: 212177055}
   scoreText: {fileID: 2036834886}
+  score: 0
 --- !u!4 &2142600587
 Transform:
   m_ObjectHideFlags: 0
