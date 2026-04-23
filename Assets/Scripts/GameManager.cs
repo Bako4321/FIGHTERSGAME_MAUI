@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        horizontalScreenSize = 10f;
-        verticalScreenSize = 6.5f;
+        horizontalScreenSize = 15f;
+        verticalScreenSize = 14.5f;
 
         CreateSky();
 
