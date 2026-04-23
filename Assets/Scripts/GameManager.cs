@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject ShieldPrefab;
     public GameObject cloudPrefab;
     public GameObject CoinPrefab;
+    public GameObject HealthPowerUpPrefab;
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("CreateEnemyOne", 1, 2);
         InvokeRepeating("CreateEnemyTwo", 2, 3);
         InvokeRepeating("CreateEnemyThree", 3, 4);
+        InvokeRepeating("SpawnHealth", 5f, 7f);
 
         StartCoroutine(SpawnShieldRoutine());
         IEnumerator SpawnShieldRoutine()
@@ -94,6 +96,15 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
         Instantiate(CoinPrefab, spawnPos, Quaternion.identity);
+    }
+    void SpawnHealth()
+    {
+    float x = Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f);
+    float y = Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f); 
+
+    Vector3 spawnPos = new Vector3(x, y, 0f);
+
+    Instantiate(HealthPowerUpPrefab, spawnPos, Quaternion.identity);
     }
 
     public void AddScore(int earnedScore)

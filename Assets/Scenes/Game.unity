@@ -969,6 +969,7 @@ MonoBehaviour:
   ShieldPrefab: {fileID: 8163316058529485204, guid: b5f8a5d81c474894aac8b4b81e56c281, type: 3}
   cloudPrefab: {fileID: 9207418728420716899, guid: 6622957d7ee924de4968a8131a8cb412, type: 3}
   CoinPrefab: {fileID: 1668335986777445209, guid: 689588e55e867f4498a85c7ed057d619, type: 3}
+  HealthPowerUpPrefab: {fileID: 9207418728420716899, guid: 58c8305a831cf7f4c89cdbbe537f3716, type: 3}
   horizontalScreenSize: 0
   verticalScreenSize: 0
   livesText: {fileID: 212177055}
