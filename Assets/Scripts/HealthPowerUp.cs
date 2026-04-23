@@ -8,9 +8,26 @@ public class HealthPowerUp : MonoBehaviour
         Destroy(gameObject, 4f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+
+            if (player != null)
+            {
+                if (player.lives < 3)
+                {
+                    player.lives++;
+                    FindObjectOfType<GameManager>().ChangeLivesText(player.lives);
+                }
+                else
+                {
+                    FindObjectOfType<GameManager>().AddScore(1);
+                }
+            }
+
+            Destroy(gameObject);
+        }
     }
 }
