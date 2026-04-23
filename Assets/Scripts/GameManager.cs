@@ -102,12 +102,15 @@ public class GameManager : MonoBehaviour
     }
     void SpawnHealth()
     {
-    float x = Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f);
-    float y = Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f); 
+        float safeHorizontal = 8f;
+        float safeVertical = 4.5f;
 
-    Vector3 spawnPos = new Vector3(x, y, 0f);
+        float x = Random.Range(-safeHorizontal, safeHorizontal);
+        float y = Random.Range(-safeVertical, safeVertical); 
 
-    Instantiate(HealthPowerUpPrefab, spawnPos, Quaternion.identity);
+        Vector3 spawnPos = new Vector3(x, y, 0f);
+
+        Instantiate(HealthPowerUpPrefab, spawnPos, Quaternion.identity);
     }
 
     public void AddScore(int earnedScore)
