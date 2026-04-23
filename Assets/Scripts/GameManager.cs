@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; 
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,27 +10,49 @@ public class GameManager : MonoBehaviour
     public GameObject enemyThreePrefab;
     public GameObject ShieldPrefab;
     public GameObject cloudPrefab;
-    
+    public GameObject CoinPrefab;
+    public GameObject HealthPowerUpPrefab;
+
     public float horizontalScreenSize;
     public float verticalScreenSize;
 
     public TextMeshProUGUI livesText;
-    public TextMeshProUGUI scoreText; 
+    public TextMeshProUGUI scoreText;
 
     public int score;
 
     void Start()
     {
-        horizontalScreenSize = 10f; 
-        verticalScreenSize = 6.5f; 
-        score = 0;
+        horizontalScreenSize = 15f;
+        verticalScreenSize = 14.5f;
+        score = 0; 
 
         CreateSky();
 
         InvokeRepeating("CreateEnemyOne", 1, 2);
         InvokeRepeating("CreateEnemyTwo", 2, 3);
         InvokeRepeating("CreateEnemyThree", 3, 4);
-        InvokeRepeating("SpawnShield", 2f, 4f);
+        InvokeRepeating("SpawnHealth", 5f, 7f);
+
+        StartCoroutine(SpawnShieldRoutine());
+        IEnumerator SpawnShieldRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Random.Range(24f, 30f)); // 4�5 per 2 minutes
+                SpawnShield();
+            }
+        }
+
+        StartCoroutine(SpawnCoinRoutine());
+        IEnumerator SpawnCoinRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Random.Range(10f, 18f)); // 4�5 per 2 minutes
+                SpawnCoin();
+            }
+        }
     }
 
     void CreateSky()
@@ -39,39 +61,66 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
         }
-        
+
     }
-
-
     void CreateEnemyOne()
     {
-        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) *.9f, verticalScreenSize, 0), Quaternion.identity);
+        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * .9f, verticalScreenSize, 0), Quaternion.identity);
     }
 
     void CreateEnemyTwo()
     {
-        Instantiate(enemyTwoPrefab, new Vector3(Random.Range(-8f, 8f), 7f, 0), Quaternion.identity);
+        Instantiate(enemyTwoPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 7f, verticalScreenSize, 0), Quaternion.identity);
     }
     void CreateEnemyThree()
     {
-        Instantiate(enemyThreePrefab, new Vector3(Random.Range(-6f, 9f), 6.5f, 0f), Quaternion.identity);
+        Instantiate(enemyThreePrefab, new Vector3(Random.Range(-7f, 7f) * 6.5f, verticalScreenSize, 0), Quaternion.identity);
     }
     void SpawnShield()
     {
-        float x = Random.Range(-4f, 4f);
-        float y = 5f; 
+        float screenHalfHeight = Camera.main.orthographicSize;
+        float screenHalfWidth = screenHalfHeight * Screen.width / Screen.height;
+
+        float x = Random.Range(-7f, 7f);
+        float y = Random.Range(-8f, -1f);
 
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
         Instantiate(ShieldPrefab, spawnPos, Quaternion.identity);
     }
-    public void AddScore(int earnedScore)
+    void SpawnCoin()
     {
-        score = score + earnedScore;
-        scoreText.text = "Score: " + score;
+        float screenHalfHeight = Camera.main.orthographicSize;
+        float screenHalfWidth = screenHalfHeight * Screen.width / Screen.height;
+
+        float x = Random.Range(-9f, 9f);
+        float y = Random.Range(-8f, -2f);
+
+        Vector3 spawnPos = new Vector3(x, y, 0f);
+
+        Instantiate(CoinPrefab, spawnPos, Quaternion.identity);
+    }
+    void SpawnHealth()
+    {
+    float x = Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f);
+    float y = Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f); 
+
+    Vector3 spawnPos = new Vector3(x, y, 0f);
+
+    Instantiate(HealthPowerUpPrefab, spawnPos, Quaternion.identity);
     }
 
-    public void ChangeLivesText (int currentLives){
-        livesText.text = "lives" + currentLives; 
+    public void AddScore(int earnedScore)
+    {
+       
+        score = score + earnedScore;
+        scoreText.text = "Score:" + score;
+
     }
+
+   public void ChangeLivesText (int currentLives)
+    {
+        livesText.text = "Lives: " + currentLives;
+    }
+ 
 }
