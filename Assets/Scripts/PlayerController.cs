@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private float verticalScreenSize;
 
     public GameObject bulletPrefab;
+    private bool shieldActive;
 
     void Start()
     {
@@ -51,6 +52,27 @@ public class PlayerController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void Shield()
+    {
+        if (!shieldActive)
+        {
+            lives--;
+            gameManager.ChangeLivesText(lives);
+
+            if (lives == 0)
+            {
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            // Optional: feedback when shield blocks damage
+            Debug.Log("Shield absorbed damage!");
+        }
+    }
+
 
     void Shooting()
     {
