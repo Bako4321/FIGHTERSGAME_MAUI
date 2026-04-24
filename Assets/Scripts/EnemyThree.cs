@@ -14,12 +14,12 @@ public class Enemy3 : MonoBehaviour
     {
         transform.Translate(new Vector3(switchDirection, -0.5f, 0) * Time.deltaTime * 9f);
 
-        if (transform.position.x <= -14f)
+        if (transform.position.x <= -10.5f)
         {
             switchDirection = 1;
         }
 
-        if (transform.position.x >= 14f)
+        if (transform.position.x >= 10.5f)
         {
             switchDirection = -1;
         }

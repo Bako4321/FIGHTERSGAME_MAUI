@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public AudioClip powerDownSound;
     public AudioClip coinSound;
     public AudioClip healthSound;
+    public AudioClip explosionSound;
 
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI scoreText;
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
     }
     void CreateEnemyThree()
     {
-        Instantiate(enemyThreePrefab, new Vector3(Random.Range(-7f, 7f) * 6.5f, verticalScreenSize, 0), Quaternion.identity);
+        Instantiate(enemyThreePrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.9f, horizontalScreenSize * 0.9f), verticalScreenSize, 0), Quaternion.identity);
     }
     
     void SpawnCoin()
@@ -167,6 +168,9 @@ public class GameManager : MonoBehaviour
                 break;
             case 4:
                 audioPlayer.GetComponent<AudioSource>().PlayOneShot(healthSound);
+                break;
+            case 5:
+                audioPlayer.GetComponent<AudioSource>().PlayOneShot(explosionSound);
                 break;
         }
     }

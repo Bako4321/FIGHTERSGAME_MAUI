@@ -596,7 +596,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1281,6 +1281,7 @@ MonoBehaviour:
   powerDownSound: {fileID: 8300000, guid: 86237706879f3c44db594d2c5cb1f7b3, type: 3}
   coinSound: {fileID: 8300000, guid: 90b3ebbc618813a44b27143d1d188ff7, type: 3}
   healthSound: {fileID: 8300000, guid: b403d3f2363dc8d4bb065d19a7919002, type: 3}
+  explosionSound: {fileID: 8300000, guid: ec48bc6fd0610e74090bfad745853ad5, type: 3}
   livesText: {fileID: 212177055}
   scoreText: {fileID: 2036834886}
   powerupText: {fileID: 1796354266}

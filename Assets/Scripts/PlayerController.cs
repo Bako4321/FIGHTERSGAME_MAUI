@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         if(lives ==0)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
+            gameManager.PlaySound(5);
             gameManager.GameOver();
 
             Destroy(this.gameObject);
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
         float clampedY = Mathf.Clamp(
         transform.position.y,
 
-        -4.5f, 0f);
+        -3.5f, 0f);
 
         transform.position = new Vector3(transform.position.x, clampedY, 0);
 
