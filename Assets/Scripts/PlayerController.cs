@@ -184,14 +184,13 @@ public class PlayerController : MonoBehaviour
 
 
     
-  // VERTICAL clamp (bottom half only)
-    float clampedY = Mathf.Clamp(
+        // VERTICAL clamp (bottom half only)
+        float clampedY = Mathf.Clamp(
         transform.position.y,
-        -verticalScreenSize, // bottom of screen
-        0f                    // middle of screen
-    );
 
-    transform.position = new Vector3(transform.position.x, clampedY, 0);
+        -4.5f, 0f);
+
+        transform.position = new Vector3(transform.position.x, clampedY, 0);
 
     }
 

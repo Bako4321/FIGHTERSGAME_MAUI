@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        horizontalScreenSize = 15f;
-        verticalScreenSize = 14.5f;
+        horizontalScreenSize = 10f;
+        verticalScreenSize = 6.5f;
         score = 0; 
         gameOver = false;
 
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     void CreatePowerup()
     {
-        Instantiate(powerupPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
+        Instantiate(powerupPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, 0f), 0), Quaternion.identity);
     }
 
     void CreateSky()
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         float screenHalfWidth = screenHalfHeight * Screen.width / Screen.height;
 
         float x = Random.Range(-9f, 9f);
-        float y = Random.Range(-8f, -2f);
+        float y = Random.Range(-4.5f, 0f);
 
         Vector3 spawnPos = new Vector3(x, y, 0f);
 
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
     void CreateHealth()
     {
-        Instantiate(healthPowerUpPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
+        Instantiate(healthPowerUpPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, 0f), 0), Quaternion.identity);
     }
 
     public void ManagePowerupText(int powerupType)
