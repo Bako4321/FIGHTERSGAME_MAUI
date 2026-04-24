@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class HealthPowerUp : MonoBehaviour
 {
+    private GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Destroy(gameObject, 4f);
     }
 
@@ -18,6 +20,7 @@ public class HealthPowerUp : MonoBehaviour
             {
                 if (player.lives < 3)
                 {
+                    gameManager.PlaySound(4);
                     player.lives++;
                     FindFirstObjectByType<GameManager>().ChangeLivesText(player.lives);
                 }

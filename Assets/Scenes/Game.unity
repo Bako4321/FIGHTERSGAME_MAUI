@@ -1269,7 +1269,6 @@ MonoBehaviour:
   enemyOnePrefab: {fileID: 9207418728420716899, guid: 57d7aa5182902e24cb707961f14f52d5, type: 3}
   enemyTwoPrefab: {fileID: 9081002450290056849, guid: 1ce09a9d8207b604f9b66b0e101f2ca0, type: 3}
   enemyThreePrefab: {fileID: 4730195380929137402, guid: 4938d4a3a6fa7f747b1eb379c74e5dab, type: 3}
-  ShieldPrefab: {fileID: 8163316058529485204, guid: b5f8a5d81c474894aac8b4b81e56c281, type: 3}
   cloudPrefab: {fileID: 9207418728420716899, guid: 6622957d7ee924de4968a8131a8cb412, type: 3}
   CoinPrefab: {fileID: 1668335986777445209, guid: 689588e55e867f4498a85c7ed057d619, type: 3}
   healthPowerUpPrefab: {fileID: 9207418728420716899, guid: 58c8305a831cf7f4c89cdbbe537f3716, type: 3}
@@ -1280,6 +1279,8 @@ MonoBehaviour:
   audioPlayer: {fileID: 1047748872}
   powerUpSound: {fileID: 8300000, guid: 752ca85f206f14146942c3fcafbdd492, type: 3}
   powerDownSound: {fileID: 8300000, guid: 86237706879f3c44db594d2c5cb1f7b3, type: 3}
+  coinSound: {fileID: 8300000, guid: 90b3ebbc618813a44b27143d1d188ff7, type: 3}
+  healthSound: {fileID: 8300000, guid: b403d3f2363dc8d4bb065d19a7919002, type: 3}
   livesText: {fileID: 212177055}
   scoreText: {fileID: 2036834886}
   powerupText: {fileID: 1796354266}
