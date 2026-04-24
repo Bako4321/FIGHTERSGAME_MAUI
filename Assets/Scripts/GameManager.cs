@@ -2,47 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject enemyOnePrefab;
     public GameObject enemyTwoPrefab;
     public GameObject enemyThreePrefab;
-    public GameObject ShieldPrefab;
     public GameObject cloudPrefab;
     public GameObject CoinPrefab;
-    public GameObject HealthPowerUpPrefab;
+    public GameObject healthPowerUpPrefab;
+    public GameObject gameOverMenu;
+    public GameObject powerupPrefab;
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
 
+    public GameObject audioPlayer;
+    public AudioClip powerUpSound;
+    public AudioClip powerDownSound;
+
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI powerupText;
 
     public int score;
+
+    private bool gameOver;
 
     void Start()
     {
         horizontalScreenSize = 15f;
         verticalScreenSize = 14.5f;
         score = 0; 
+        gameOver = false;
 
         CreateSky();
 
         InvokeRepeating("CreateEnemyOne", 1, 2);
         InvokeRepeating("CreateEnemyTwo", 2, 3);
         InvokeRepeating("CreateEnemyThree", 3, 4);
-        InvokeRepeating("SpawnHealth", 5f, 7f);
 
-        StartCoroutine(SpawnShieldRoutine());
-        IEnumerator SpawnShieldRoutine()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(Random.Range(24f, 30f)); // 4�5 per 2 minutes
-                SpawnShield();
-            }
-        }
+        powerupText.text = "No Powerups Yet!";
+
+        StartCoroutine(SpawnHealth());
+        StartCoroutine(SpawnPowerup());
 
         StartCoroutine(SpawnCoinRoutine());
         IEnumerator SpawnCoinRoutine()
@@ -53,6 +57,27 @@ public class GameManager : MonoBehaviour
                 SpawnCoin();
             }
         }
+    }
+
+    void Update()
+    {
+        if(gameOver && Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    IEnumerator SpawnPowerup()
+    {
+        float spawnTime = Random.Range(3, 5);
+        yield return new WaitForSeconds(spawnTime);
+        CreatePowerup();
+        StartCoroutine(SpawnPowerup());
+    }
+
+    void CreatePowerup()
+    {
+        Instantiate(powerupPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
     }
 
     void CreateSky()
@@ -76,18 +101,7 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(enemyThreePrefab, new Vector3(Random.Range(-7f, 7f) * 6.5f, verticalScreenSize, 0), Quaternion.identity);
     }
-    void SpawnShield()
-    {
-        float screenHalfHeight = Camera.main.orthographicSize;
-        float screenHalfWidth = screenHalfHeight * Screen.width / Screen.height;
-
-        float x = Random.Range(-7f, 7f);
-        float y = Random.Range(-8f, -1f);
-
-        Vector3 spawnPos = new Vector3(x, y, 0f);
-
-        Instantiate(ShieldPrefab, spawnPos, Quaternion.identity);
-    }
+    
     void SpawnCoin()
     {
         float screenHalfHeight = Camera.main.orthographicSize;
@@ -100,17 +114,53 @@ public class GameManager : MonoBehaviour
 
         Instantiate(CoinPrefab, spawnPos, Quaternion.identity);
     }
-    void SpawnHealth()
+
+    IEnumerator SpawnHealth()
     {
-        float safeHorizontal = 8f;
-        float safeVertical = 4.5f;
+        float spawnTime = Random.Range(6, 8);
+        yield return new WaitForSeconds(spawnTime);
+        CreateHealth();
+        StartCoroutine(SpawnHealth());
+    }
 
-        float x = Random.Range(-safeHorizontal, safeHorizontal);
-        float y = Random.Range(-safeVertical, safeVertical); 
+    void CreateHealth()
+    {
+        Instantiate(healthPowerUpPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
+    }
 
-        Vector3 spawnPos = new Vector3(x, y, 0f);
+    public void ManagePowerupText(int powerupType)
+    {
+        switch (powerupType)
+        {
+            case 1: 
+                powerupText.text = "Speed Boost!";
+                break;
+            case 2:
+                powerupText.text = "Double Weapon!";
+                break;
+            case 3:
+                powerupText.text = "Triple Weapon!";
+                break;
+            case 4:
+                powerupText.text = "Shield!";
+                break;
+            default:
+                powerupText.text = "No Powerups Yet!";
+                break;
+        }
+    }
 
-        Instantiate(HealthPowerUpPrefab, spawnPos, Quaternion.identity);
+    public void PlaySound(int whichSound)
+    {
+        switch(whichSound)
+        {
+            case 1:
+                audioPlayer.GetComponent<AudioSource>().PlayOneShot(powerUpSound);
+                break;
+            case 2:
+                audioPlayer.GetComponent<AudioSource>().PlayOneShot(powerDownSound);
+                break;
+        }
     }
 
     public void AddScore(int earnedScore)
@@ -124,6 +174,12 @@ public class GameManager : MonoBehaviour
    public void ChangeLivesText (int currentLives)
     {
         livesText.text = "Lives: " + currentLives;
+    }
+
+    public void GameOver()
+    {
+        gameOverMenu.SetActive(true);
+        gameOver = true;
     }
  
 }

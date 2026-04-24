@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,12 +23,19 @@ public class PlayerController : MonoBehaviour
     private float verticalScreenSize;
 
     public GameObject bulletPrefab;
-    private bool ShieldActive;
+    public bool shieldActive;
+    public GameObject thruster;
+    public GameObject shield;
+
+    public int weaponType;
+
 
     void Start()
     {
         playerSpeed = 6f;
         lives = 3; 
+        shieldActive = false;
+        weaponType = 1;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         gameManager.ChangeLivesText(lives); 
 
@@ -44,43 +50,118 @@ public class PlayerController : MonoBehaviour
         Shooting();
 
     }
-    public void LoseALife(){
-        lives--;
+    public void LoseALife()
+    {
+        if (!shieldActive)
+        {
+            lives--;
+        }
+        if (shieldActive)
+        {
+            StopCoroutine("ShieldPowerDown");
+            shield.SetActive(false);
+            shieldActive = false;
+            gameManager.PlaySound(2);
+            gameManager.ManagePowerupText(5);
+        }
         gameManager.ChangeLivesText(lives); 
-        if(lives ==0){
+        if(lives ==0)
+        {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            gameManager.GameOver();
+
             Destroy(this.gameObject);
         }
     }
 
-    
-    public bool shieldActive = false;
-
-    public void ActivateShield(float duration)
+    IEnumerator ShieldPowerDown()
     {
-        StopAllCoroutines(); // optional: refresh shield if picked up again
-        StartCoroutine(ShieldCoroutine(duration));
-    }
-
-    private IEnumerator ShieldCoroutine(float duration)
-    {
-        shieldActive = true;
-
-        // Optional: enable shield visual here
-
-        yield return new WaitForSeconds(duration);
-
+        yield return new WaitForSeconds(5);
+        shield.SetActive(false);
         shieldActive = false;
-
-        // Optional: disable shield visual here
+        gameManager.PlaySound(2);
+        gameManager.ManagePowerupText(5);
     }
+
+    IEnumerator SpeedPowerDown()
+    {
+        yield return new WaitForSeconds(5);
+        playerSpeed = 5f;
+        thruster.SetActive(false);
+        gameManager.PlaySound(2);
+        gameManager.ManagePowerupText(5);
+    }
+
+    IEnumerator WeaponPowerDown()
+    {
+        yield return new WaitForSeconds(5);
+        weaponType = 1;
+        gameManager.PlaySound(2);
+        gameManager.ManagePowerupText(5);
+    }
+
+    private void OnTriggerEnter2D(Collider2D whatDidIHit)
+    {
+        if (whatDidIHit.tag == "Powerup")
+        {
+            Destroy(whatDidIHit.gameObject);
+            int whichPowerup = Random.Range(1,5);
+            gameManager.PlaySound(1);
+            switch (whichPowerup)
+            {
+                case 1:
+                    // speed boost and thruster active
+                    playerSpeed  = 10f;
+                    thruster.SetActive(true);
+                    gameManager.ManagePowerupText(1);
+                    StartCoroutine(SpeedPowerDown());
+                    break;
+                case 2:
+                    // weapon type 2
+                    weaponType = 2;
+                    gameManager.ManagePowerupText(2);
+                    StartCoroutine(WeaponPowerDown());
+                    break;
+                case 3:
+                    // weapon type 3
+                    weaponType = 3;
+                    gameManager.ManagePowerupText(3);
+                    StartCoroutine(WeaponPowerDown());
+                    break;
+                case 4:
+                    // Shield powerup
+                    shield.SetActive(true);
+                    shieldActive = true;
+                    gameManager.ManagePowerupText(4);
+                    StartCoroutine("ShieldPowerDown");
+                    break;
+            }
+        }
+    }
+    
+
 
     void Shooting()
     {
         //if the player presses the SPACE key, create a projectile
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bulletPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            switch(weaponType)
+            {
+                case 1:
+                    Instantiate(bulletPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+                    break;
+                case 2:
+                    Instantiate(bulletPrefab, transform.position + new Vector3(-0.5f, 0.5f, 0), Quaternion.identity);
+                    Instantiate(bulletPrefab, transform.position + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                    break;
+                case 3:
+                    Instantiate(bulletPrefab, transform.position + new Vector3(-0.5f, 0.5f, 0), Quaternion.Euler(0, 0, 45));
+                    Instantiate(bulletPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+                    Instantiate(bulletPrefab, transform.position + new Vector3(0.5f, 0.5f, 0), Quaternion.Euler(0, 0, -45));
+                    break;
+            }
         }
     }
 
